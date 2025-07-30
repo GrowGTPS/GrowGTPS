@@ -256,6 +256,167 @@
     100% { transform: rotate(360deg); }
   }
 
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 10px;
+  }
+
+  .success-icon {
+    font-size: 4rem;
+    color: #10b981;
+    margin-bottom: 15px;
+  }
+
+  .order-details {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .detail-value {
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  .tracking-highlight {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .next-steps {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .steps-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .step-item {
+    margin-bottom: 10px;
+    padding: 8px 0;
+    font-weight: 500;
+    color: #b45309;
+  }
+
+  .payment-link {
+    background: #10b981;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin: 10px 5px;
+    transition: all 0.3s ease;
+  }
+
+  .payment-link:hover {
+    background: #059669;
+    transform: translateY(-2px);
+  }
+
+  .whatsapp-link {
+    background: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin: 10px 5px;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-link:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+  }
+
+  .close-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+  }
+
   @media (max-width: 768px) {
     .container {
       padding: 15px;
@@ -279,6 +440,23 @@
     .info-section,
     .contact-section {
       padding: 20px;
+    }
+
+    .modal-content {
+      margin: 10% auto;
+      padding: 20px;
+    }
+
+    .detail-row {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .payment-link,
+    .whatsapp-link {
+      display: block;
+      text-align: center;
+      margin: 10px 0;
     }
   }
 
@@ -427,6 +605,64 @@
   </div>
 </div>
 
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="success-icon">🎉</div>
+      <div class="modal-title">Pesanan Berhasil Dibuat!</div>
+    </div>
+    
+    <div class="tracking-highlight">
+      📦 Nomor Resi: <span id="modalTrackingNumber"></span>
+    </div>
+
+    <div class="order-details">
+      <div class="detail-row">
+        <span class="detail-label">👤 Username:</span>
+        <span class="detail-value" id="modalUsername"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">🌍 World:</span>
+        <span class="detail-value" id="modalWorld"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">🎁 Item:</span>
+        <span class="detail-value" id="modalItem"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">📦 Jumlah:</span>
+        <span class="detail-value" id="modalQuantity"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">💰 Total:</span>
+        <span class="detail-value" id="modalTotal"></span>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <div class="steps-title">📋 Langkah Selanjutnya:</div>
+      <div class="step-item">1️⃣ Klik tombol "Buka Halaman Pembayaran" di bawah</div>
+      <div class="step-item">2️⃣ Scan QR QRIS dan bayar sesuai total</div>
+      <div class="step-item">3️⃣ Screenshot bukti transfer dan upload</div>
+      <div class="step-item">4️⃣ Hubungi admin untuk konfirmasi</div>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="./payment.html" class="payment-link" target="_blank">
+        💳 Buka Halaman Pembayaran
+      </a>
+      <a href="https://wa.me/6288112733391" class="whatsapp-link" target="_blank">
+        📱 Chat Admin WhatsApp
+      </a>
+    </div>
+
+    <button id="closeModal" class="close-btn">
+      ✅ Mengerti, Tutup
+    </button>
+  </div>
+</div>
+
 <script>
 (function(){
   var DB_NAME = 'growgtps_customer_db';
@@ -478,6 +714,31 @@
         notification.parentNode.removeChild(notification);
       }
     }, 5000);
+  }
+
+  function showSuccessModal(order, itemName, username, world, quantity, totalPrice) {
+    document.getElementById('modalTrackingNumber').textContent = order.trackingNumber;
+    document.getElementById('modalUsername').textContent = username;
+    document.getElementById('modalWorld').textContent = world;
+    document.getElementById('modalItem').textContent = itemName;
+    document.getElementById('modalQuantity').textContent = quantity + ' pcs';
+    document.getElementById('modalTotal').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+    document.getElementById('successModal').style.display = 'block';
+  }
+
+  function setupModal() {
+    var modal = document.getElementById('successModal');
+    var closeBtn = document.getElementById('closeModal');
+    
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
   }
 
   function updateSubmitButton() {
@@ -560,21 +821,22 @@
       };
 
       addOrder(order).then(function() {
-        showNotification('Pesanan berhasil dibuat! Mengalihkan ke halaman pembayaran...', 'success');
-        
-        // Save order data to URL params for next page
-        var orderData = encodeURIComponent(JSON.stringify(order));
-        
-        // Redirect to payment page after 2 seconds
-        setTimeout(function() {
-          // For single page, show tracking here instead
-          showOrderTracking(order);
-        }, 2000);
+        showNotification('Pesanan berhasil dibuat!', 'success');
+        showSuccessModal(order, itemName, username, world, quantity, totalPrice);
+
+        form.reset();
+        for(var k = 0; k < itemBoxes.length; k++) {
+          itemBoxes[k].classList.remove('selected');
+        }
+        itemHidden.value = '';
+        updateSubmitButton();
 
       }).catch(function(error) {
         showNotification('Terjadi kesalahan: ' + error, 'error');
       }).finally(function() {
-        // Don't reset button here since we're redirecting
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '🚀 Buat Pesanan Disini';
+        updateSubmitButton();
       });
     });
   }
@@ -582,8 +844,10 @@
   function init(){
     openDb().then(function() {
       setupUI();
+      setupModal();
     }).catch(function(e) {
       showNotification('Terjadi kesalahan sistem: ' + e, 'error');
+      setupModal();
     });
   }
 
