@@ -417,6 +417,286 @@
     box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
   }
 
+  .payment-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-top: 30px;
+    display: none;
+    animation: slideDown 0.5s ease;
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .payment-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 10px;
+  }
+
+  .payment-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+  }
+
+  .payment-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .qr-section {
+    text-align: center;
+  }
+
+  .qr-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 15px;
+  }
+
+  .qr-code {
+    background: white;
+    border: 3px solid #e5e7eb;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .qr-placeholder {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #9ca3af;
+    margin: 0 auto;
+  }
+
+  .payment-info {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .payment-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #92400e;
+    text-align: center;
+  }
+
+  .upload-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .upload-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 15px;
+  }
+
+  .upload-area {
+    border: 3px dashed #d1d5db;
+    border-radius: 15px;
+    padding: 40px 20px;
+    text-align: center;
+    background: rgba(249, 250, 251, 0.8);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  .upload-area:hover {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  .upload-area.dragover {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+  }
+
+  .upload-icon {
+    font-size: 3rem;
+    color: #9ca3af;
+    margin-bottom: 10px;
+  }
+
+  .upload-text {
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .uploaded-file {
+    background: #f0fdf4;
+    border: 2px solid #16a34a;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: none;
+  }
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .file-icon {
+    font-size: 1.5rem;
+    color: #16a34a;
+  }
+
+  .file-details {
+    flex: 1;
+  }
+
+  .file-name {
+    font-weight: 600;
+    color: #166534;
+  }
+
+  .file-size {
+    font-size: 0.9rem;
+    color: #16a34a;
+  }
+
+  .process-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .process-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  }
+
+  .process-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .success-payment-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+  }
+
+  .success-payment-content {
+    background: white;
+    margin: 5% auto;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative;
+    animation: slideIn 0.3s ease;
+    text-align: center;
+  }
+
+  .success-checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #10b981;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    animation: checkmarkPulse 0.6s ease;
+  }
+
+  @keyframes checkmarkPulse {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  .success-payment-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 15px;
+  }
+
+  .success-payment-text {
+    color: #6b7280;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .processing-info {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border: 2px solid #3b82f6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .processing-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 10px;
+  }
+
+  .processing-text {
+    color: #1e3a8a;
+    font-weight: 500;
+  }
+
   @media (max-width: 768px) {
     .container {
       padding: 15px;
@@ -445,6 +725,16 @@
     .modal-content {
       margin: 10% auto;
       padding: 20px;
+    }
+
+    .payment-content {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .qr-placeholder {
+      width: 150px;
+      height: 150px;
     }
 
     .detail-row {
@@ -603,6 +893,84 @@
       📱 Chat WhatsApp
     </a>
   </div>
+
+  <!-- Payment Section -->
+  <div id="paymentSection" class="payment-section">
+    <div class="payment-header">
+      <div class="payment-title">💳 Pembayaran QRIS</div>
+      <div class="payment-subtitle">Scan QR Code untuk melakukan pembayaran</div>
+    </div>
+
+    <div class="payment-content">
+      <div class="qr-section">
+        <div class="qr-title">📱 Scan QR Code</div>
+        <div class="qr-code">
+          <img src="https://iili.io/FSJ96oQ.md.jpg" alt="QRIS GrowGTPS" style="width: 200px; height: 200px; border-radius: 10px;" />
+        </div>
+        <div class="payment-info">
+          <div class="payment-amount" id="paymentAmount">Rp 0</div>
+        </div>
+      </div>
+
+      <div class="upload-section">
+        <div class="upload-title">📸 Upload Bukti Pembayaran</div>
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">📁</div>
+          <div class="upload-text">
+            <strong>Klik untuk upload</strong> atau drag & drop<br>
+            Format: JPG, PNG, PDF (Max 5MB)
+          </div>
+        </div>
+        <input type="file" id="fileInput" class="file-input" accept="image/*,.pdf" />
+        
+        <div class="uploaded-file" id="uploadedFile">
+          <div class="file-info">
+            <div class="file-icon">✅</div>
+            <div class="file-details">
+              <div class="file-name" id="fileName"></div>
+              <div class="file-size" id="fileSize"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="processPayment" class="process-btn" disabled>
+      💰 Proses Pembayaran
+    </button>
+  </div>
+</div>
+
+<!-- Success Payment Modal -->
+<div id="successPaymentModal" class="success-payment-modal">
+  <div class="success-payment-content">
+    <div class="success-checkmark">
+      ✓
+    </div>
+    
+    <div class="success-payment-title">Pembayaran Berhasil!</div>
+    <div class="success-payment-text">
+      Terima kasih! Bukti pembayaran Anda telah diterima dan sedang diverifikasi oleh tim kami.
+    </div>
+
+    <div class="processing-info">
+      <div class="processing-title">⏰ Proses Verifikasi</div>
+      <div class="processing-text">
+        Pesanan Anda akan diproses dalam 1-24 jam setelah pembayaran dikonfirmasi.
+        Kami akan mengirimkan notifikasi melalui WhatsApp.
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="https://wa.me/6288112733391" class="whatsapp-link" target="_blank">
+        📱 Chat Admin WhatsApp
+      </a>
+    </div>
+
+    <button id="closePaymentModal" class="close-btn">
+      ✅ Mengerti, Tutup
+    </button>
+  </div>
 </div>
 
 <!-- Success Modal -->
@@ -704,18 +1072,6 @@
     return prefix + timestamp.substr(-6) + random;
   }
 
-  function showNotification(message, type){
-    var notification = document.createElement('div');
-    notification.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 15px 20px; background: ' + (type === 'success' ? '#10b981' : '#ef4444') + '; color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; font-weight: 600; max-width: 400px;';
-    notification.textContent = message;
-    document.body.appendChild(notification);
-    setTimeout(function() {
-      if (notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
-    }, 5000);
-  }
-
   function showSuccessModal(order, itemName, username, world, quantity, totalPrice) {
     document.getElementById('modalTrackingNumber').textContent = order.trackingNumber;
     document.getElementById('modalUsername').textContent = username;
@@ -724,6 +1080,130 @@
     document.getElementById('modalQuantity').textContent = quantity + ' pcs';
     document.getElementById('modalTotal').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
     document.getElementById('successModal').style.display = 'block';
+    
+    // Show payment section
+    document.getElementById('paymentSection').style.display = 'block';
+    document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+    
+    // Scroll to payment section
+    setTimeout(function() {
+      document.getElementById('paymentSection').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 500);
+  }
+
+  function setupPaymentUpload() {
+    var uploadArea = document.getElementById('uploadArea');
+    var fileInput = document.getElementById('fileInput');
+    var uploadedFile = document.getElementById('uploadedFile');
+    var processBtn = document.getElementById('processPayment');
+    var fileName = document.getElementById('fileName');
+    var fileSize = document.getElementById('fileSize');
+    var uploadedFileData = null;
+
+    function updateProcessButton() {
+      if (uploadedFileData) {
+        processBtn.disabled = false;
+      } else {
+        processBtn.disabled = true;
+      }
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      var k = 1024;
+      var sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      var i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function handleFile(file) {
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        return;
+      }
+
+      if (!file.type.match('image.*') && file.type !== 'application/pdf') {
+        return;
+      }
+
+      uploadedFileData = file;
+      fileName.textContent = file.name;
+      fileSize.textContent = formatFileSize(file.size);
+      uploadedFile.style.display = 'block';
+      uploadArea.style.display = 'none';
+      updateProcessButton();
+    }
+
+    uploadArea.addEventListener('click', function() {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function(e) {
+      if (e.target.files.length > 0) {
+        handleFile(e.target.files[0]);
+      }
+    });
+
+    uploadArea.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    processBtn.addEventListener('click', function() {
+      if (!uploadedFileData) {
+        return;
+      }
+
+      processBtn.disabled = true;
+      processBtn.innerHTML = '<div class="loading"></div> Memproses...';
+
+      // Simulate processing time
+      setTimeout(function() {
+        document.getElementById('successPaymentModal').style.display = 'block';
+        document.getElementById('successModal').style.display = 'none';
+        document.getElementById('paymentSection').style.display = 'none';
+        
+        processBtn.disabled = false;
+        processBtn.innerHTML = '💰 Proses Pembayaran';
+        
+        // Reset upload
+        uploadedFile.style.display = 'none';
+        uploadArea.style.display = 'block';
+        uploadedFileData = null;
+        fileInput.value = '';
+        updateProcessButton();
+      }, 2000);
+    });
+  }
+
+  function setupPaymentModal() {
+    var paymentModal = document.getElementById('successPaymentModal');
+    var closePaymentBtn = document.getElementById('closePaymentModal');
+    
+    closePaymentBtn.addEventListener('click', function() {
+      paymentModal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', function(event) {
+      if (event.target === paymentModal) {
+        paymentModal.style.display = 'none';
+      }
+    });
   }
 
   function setupModal() {
@@ -779,13 +1259,11 @@
       ev.preventDefault();
 
       if (usernameInput.value.trim() === '') {
-        showNotification('Username GrowGTPS wajib diisi!', 'error');
         usernameInput.focus();
         return;
       }
 
       if (!itemHidden.value) {
-        showNotification('Silakan pilih item terlebih dahulu!', 'error');
         return;
       }
 
@@ -821,7 +1299,6 @@
       };
 
       addOrder(order).then(function() {
-        showNotification('Pesanan berhasil dibuat!', 'success');
         showSuccessModal(order, itemName, username, world, quantity, totalPrice);
 
         form.reset();
@@ -832,7 +1309,7 @@
         updateSubmitButton();
 
       }).catch(function(error) {
-        showNotification('Terjadi kesalahan: ' + error, 'error');
+        console.log('Error: ' + error);
       }).finally(function() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '🚀 Buat Pesanan Disini';
@@ -845,9 +1322,13 @@
     openDb().then(function() {
       setupUI();
       setupModal();
+      setupPaymentUpload();
+      setupPaymentModal();
     }).catch(function(e) {
-      showNotification('Terjadi kesalahan sistem: ' + e, 'error');
+      console.log('Database error: ' + e);
       setupModal();
+      setupPaymentUpload();
+      setupPaymentModal();
     });
   }
 
