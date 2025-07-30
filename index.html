@@ -1080,18 +1080,6 @@
     document.getElementById('modalQuantity').textContent = quantity + ' pcs';
     document.getElementById('modalTotal').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
     document.getElementById('successModal').style.display = 'block';
-    
-    // Show payment section
-    document.getElementById('paymentSection').style.display = 'block';
-    document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
-    
-    // Scroll to payment section
-    setTimeout(function() {
-      document.getElementById('paymentSection').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }, 500);
   }
 
   function setupPaymentUpload() {
@@ -1299,7 +1287,17 @@
       };
 
       addOrder(order).then(function() {
-        showSuccessModal(order, itemName, username, world, quantity, totalPrice);
+        // Langsung show payment section tanpa modal
+        document.getElementById('paymentSection').style.display = 'block';
+        document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+        
+        // Scroll to payment section
+        setTimeout(function() {
+          document.getElementById('paymentSection').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 300);
 
         form.reset();
         for(var k = 0; k < itemBoxes.length; k++) {
