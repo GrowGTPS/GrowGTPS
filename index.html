@@ -560,25 +560,21 @@
       };
 
       addOrder(order).then(function() {
-        showNotification('Pesanan berhasil dibuat!', 'success');
-
-        var orderDetails = 'PESANAN BERHASIL DIBUAT!\n\nDETAIL PESANAN:\nKode Order: ' + order.trackingNumber + '\nUsername: ' + username + '\nWorld: ' + world + '\nItem: ' + itemName + '\nJumlah: ' + quantity + '\nTotal: Rp ' + totalPrice.toLocaleString('id-ID') + '\n\nLANGKAH SELANJUTNYA:\n1. BUKA HALAMAN PEMBAYARAN:\n   https://growgtps.github.io/GrowGTPS/payment.html\n2. Scan QR QRIS → Bayar: Rp ' + totalPrice.toLocaleString('id-ID') + '\n3. Screenshot bukti bayar\n4. Hubungi admin untuk konfirmasi\n\nWhatsApp: +62881-1273-3391\n\nSIMPAN KODE ORDER INI: ' + order.trackingNumber;
+        showNotification('Pesanan berhasil dibuat! Mengalihkan ke halaman pembayaran...', 'success');
         
-        alert(orderDetails);
-
-        form.reset();
-        for(var k = 0; k < itemBoxes.length; k++) {
-          itemBoxes[k].classList.remove('selected');
-        }
-        itemHidden.value = '';
-        updateSubmitButton();
+        // Save order data to URL params for next page
+        var orderData = encodeURIComponent(JSON.stringify(order));
+        
+        // Redirect to payment page after 2 seconds
+        setTimeout(function() {
+          // For single page, show tracking here instead
+          showOrderTracking(order);
+        }, 2000);
 
       }).catch(function(error) {
         showNotification('Terjadi kesalahan: ' + error, 'error');
       }).finally(function() {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '🚀 Buat Pesanan Disini';
-        updateSubmitButton();
+        // Don't reset button here since we're redirecting
       });
     });
   }
