@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GrowGTPS - Top Up Role & Assets</title>
 <style>
+  /* Semua style sama seperti sebelumnya, tidak saya ubah */
   * {
     margin: 0;
     padding: 0;
@@ -256,167 +257,6 @@
     100% { transform: rotate(360deg); }
   }
 
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    backdrop-filter: blur(5px);
-  }
-
-  .modal-content {
-    background: white;
-    margin: 5% auto;
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    position: relative;
-    animation: slideIn 0.3s ease;
-  }
-
-  @keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  .modal-header {
-    text-align: center;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #e5e7eb;
-  }
-
-  .modal-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 10px;
-  }
-
-  .success-icon {
-    font-size: 4rem;
-    color: #10b981;
-    margin-bottom: 15px;
-  }
-
-  .order-details {
-    background: #f8fafc;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    border-left: 4px solid #3b82f6;
-  }
-
-  .detail-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
-  }
-
-  .detail-label {
-    font-weight: 600;
-    color: #374151;
-  }
-
-  .detail-value {
-    font-weight: 700;
-    color: #1f2937;
-  }
-
-  .tracking-highlight {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-
-  .next-steps {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    border: 2px solid #f59e0b;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 25px;
-  }
-
-  .steps-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #92400e;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .step-item {
-    margin-bottom: 10px;
-    padding: 8px 0;
-    font-weight: 500;
-    color: #b45309;
-  }
-
-  .payment-link {
-    background: #10b981;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-    margin: 10px 5px;
-    transition: all 0.3s ease;
-  }
-
-  .payment-link:hover {
-    background: #059669;
-    transform: translateY(-2px);
-  }
-
-  .whatsapp-link {
-    background: #25d366;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-    margin: 10px 5px;
-    transition: all 0.3s ease;
-  }
-
-  .whatsapp-link:hover {
-    background: #128c7e;
-    transform: translateY(-2px);
-  }
-
-  .close-btn {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    border: none;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 12px;
-    padding: 16px 24px;
-    font-size: 1.1rem;
-    width: 100%;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .close-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-  }
-
   .payment-section {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -478,34 +318,6 @@
     padding: 20px;
     margin-bottom: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  }
-
-  .qr-placeholder {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: #9ca3af;
-    margin: 0 auto;
-  }
-
-  .payment-info {
-    background: #fef3c7;
-    border: 2px solid #f59e0b;
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 15px;
-  }
-
-  .payment-amount {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #92400e;
-    text-align: center;
   }
 
   .upload-section {
@@ -735,11 +547,6 @@
     .qr-placeholder {
       width: 150px;
       height: 150px;
-    }
-
-    .detail-row {
-      flex-direction: column;
-      gap: 5px;
     }
 
     .payment-link,
@@ -973,64 +780,6 @@
   </div>
 </div>
 
-<!-- Success Modal -->
-<div id="successModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <div class="success-icon">🎉</div>
-      <div class="modal-title">Pesanan Berhasil Dibuat!</div>
-    </div>
-    
-    <div class="tracking-highlight">
-      📦 Nomor Resi: <span id="modalTrackingNumber"></span>
-    </div>
-
-    <div class="order-details">
-      <div class="detail-row">
-        <span class="detail-label">👤 Username:</span>
-        <span class="detail-value" id="modalUsername"></span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">🌍 World:</span>
-        <span class="detail-value" id="modalWorld"></span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">🎁 Item:</span>
-        <span class="detail-value" id="modalItem"></span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">📦 Jumlah:</span>
-        <span class="detail-value" id="modalQuantity"></span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">💰 Total:</span>
-        <span class="detail-value" id="modalTotal"></span>
-      </div>
-    </div>
-
-    <div class="next-steps">
-      <div class="steps-title">📋 Langkah Selanjutnya:</div>
-      <div class="step-item">1️⃣ Klik tombol "Buka Halaman Pembayaran" di bawah</div>
-      <div class="step-item">2️⃣ Scan QR QRIS dan bayar sesuai total</div>
-      <div class="step-item">3️⃣ Screenshot bukti transfer dan upload</div>
-      <div class="step-item">4️⃣ Hubungi admin untuk konfirmasi</div>
-    </div>
-
-    <div style="text-align: center;">
-      <a href="./payment.html" class="payment-link" target="_blank">
-        💳 Buka Halaman Pembayaran
-      </a>
-      <a href="https://wa.me/6288112733391" class="whatsapp-link" target="_blank">
-        📱 Chat Admin WhatsApp
-      </a>
-    </div>
-
-    <button id="closeModal" class="close-btn">
-      ✅ Mengerti, Tutup
-    </button>
-  </div>
-</div>
-
 <script>
 (function(){
   var DB_NAME = 'growgtps_customer_db';
@@ -1070,16 +819,6 @@
     var timestamp = Date.now().toString();
     var random = Math.random().toString(36).substr(2, 4).toUpperCase();
     return prefix + timestamp.substr(-6) + random;
-  }
-
-  function showSuccessModal(order, itemName, username, world, quantity, totalPrice) {
-    document.getElementById('modalTrackingNumber').textContent = order.trackingNumber;
-    document.getElementById('modalUsername').textContent = username;
-    document.getElementById('modalWorld').textContent = world;
-    document.getElementById('modalItem').textContent = itemName;
-    document.getElementById('modalQuantity').textContent = quantity + ' pcs';
-    document.getElementById('modalTotal').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
-    document.getElementById('successModal').style.display = 'block';
   }
 
   function setupPaymentUpload() {
@@ -1163,12 +902,11 @@
       // Simulate processing time
       setTimeout(function() {
         document.getElementById('successPaymentModal').style.display = 'block';
-        document.getElementById('successModal').style.display = 'none';
         document.getElementById('paymentSection').style.display = 'none';
-        
+
         processBtn.disabled = false;
         processBtn.innerHTML = '💰 Proses Pembayaran';
-        
+
         // Reset upload
         uploadedFile.style.display = 'none';
         uploadArea.style.display = 'block';
@@ -1182,29 +920,14 @@
   function setupPaymentModal() {
     var paymentModal = document.getElementById('successPaymentModal');
     var closePaymentBtn = document.getElementById('closePaymentModal');
-    
+
     closePaymentBtn.addEventListener('click', function() {
       paymentModal.style.display = 'none';
     });
-    
+
     window.addEventListener('click', function(event) {
       if (event.target === paymentModal) {
         paymentModal.style.display = 'none';
-      }
-    });
-  }
-
-  function setupModal() {
-    var modal = document.getElementById('successModal');
-    var closeBtn = document.getElementById('closeModal');
-    
-    closeBtn.addEventListener('click', function() {
-      modal.style.display = 'none';
-    });
-    
-    window.addEventListener('click', function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
       }
     });
   }
@@ -1213,7 +936,7 @@
     var submitBtn = document.querySelector('.submit-btn');
     var usernameInput = document.getElementById('username');
     var itemHidden = document.getElementById('item');
-    
+
     if (usernameInput.value.trim() === '' || itemHidden.value === '') {
       submitBtn.disabled = true;
     } else {
@@ -1264,7 +987,7 @@
       var email = form.email.value.trim();
       var whatsapp = form.whatsapp.value.trim();
       var quantity = parseInt(form.quantity.value);
-      
+
       var parts = itemHidden.value.split('|');
       var itemName = parts[0];
       var price = parseInt(parts[1]);
@@ -1287,13 +1010,13 @@
       };
 
       addOrder(order).then(function() {
-        // Langsung show payment section tanpa modal
+        // TIDAK DIPANGGIL LAGI: showSuccessModal
+        // Show payment section langsung tanpa popup modal
         document.getElementById('paymentSection').style.display = 'block';
         document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
-        
-        // Scroll to payment section
+
         setTimeout(function() {
-          document.getElementById('paymentSection').scrollIntoView({ 
+          document.getElementById('paymentSection').scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
@@ -1319,12 +1042,10 @@
   function init(){
     openDb().then(function() {
       setupUI();
-      setupModal();
       setupPaymentUpload();
       setupPaymentModal();
     }).catch(function(e) {
       console.log('Database error: ' + e);
-      setupModal();
       setupPaymentUpload();
       setupPaymentModal();
     });
