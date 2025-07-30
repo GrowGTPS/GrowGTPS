@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GrowGTPS - Pembayaran & Upload Bukti</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+  }
+
+  .header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+
+  .order-summary {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 30px;
+    border-left: 5px solid #3b82f6;
+  }
+
+  .summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .tracking-id {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  .tracking-status {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .summary-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .summary-item {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #3b82f6;
+  }
+
+  .summary-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  .summary-value {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.95rem;
+  }
+
+  .countdown-timer {
+    background: #ef4444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1rem;
+  }
+
+  .payment-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+
+  .payment-warning {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .payment-warning h3 {
+    color: #92400e;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .payment-warning p {
+    color: #b45309;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .qr-code {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin: 20px auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .qr-note {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-top: 15px;
+    font-weight: 500;
+  }
+
+  .upload-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+
+  .upload-area {
+    border: 3px dashed #3b82f6;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    background: #f8fafc;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .upload-area:hover {
+    background: #e2e8f0;
+    border-color: #1d4ed8;
+  }
+
+  .upload-area.dragover {
+    background: #dbeafe;
+    border-color: #1d4ed8;
+  }
+
+  .upload-icon {
+    font-size: 3rem;
+    color: #3b82f6;
+    margin-bottom: 15px;
+  }
+
+  .upload-text {
+    font-size: 1.1rem;
+    color: #374151;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .upload-hint {
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .preview-container {
+    display: none;
+    margin-top: 20px;
+  }
+
+  .preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+  }
+
+  .preview-info {
+    background: #e0f2fe;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #0277bd;
+  }
+
+  .submit-upload-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .submit-upload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  }
+
+  .submit-upload-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .whatsapp-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+
+  .whatsapp-btn {
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 10px;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+  }
+
+  .whatsapp-btn:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+  }
+
+  .back-btn {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 114, 128, 0.3);
+  }
+
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #10b981;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    font-weight: 600;
+    max-width: 400px;
+    animation: slideIn 0.3s ease;
+  }
+
+  .notification.success {
+    background: #10b981;
+    color: white;
+  }
+
+  .notification.error {
+    background: #ef4444;
+    color: white;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+    }
+
+    .summary-details {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .summary-header {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .order-summary,
+    .payment-section,
+    .upload-section,
+    .whatsapp-section {
+      padding: 20px;
+    }
+
+    .upload-area {
+      padding: 20px;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>💳 Pembayaran & Upload Bukti</h1>
+    <p>Selesaikan pembayaran dan upload bukti transfer</p>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="order-summary">
+    <div class="summary-header">
+      <div class="tracking-id">📦 Nomor Resi: <span id="trackingNumber">Loading...</span></div>
+      <div class="tracking-status">⏳ Menunggu Pembayaran</div>
+    </div>
+    
+    <div class="summary-details">
+      <div class="summary-item">
+        <div class="summary-label">👤 Username</div>
+        <div class="summary-value" id="orderUsername">Loading...</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">🎁 Item</div>
+        <div class="summary-value" id="orderItem">Loading...</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">📦 Jumlah</div>
+        <div class="summary-value" id="orderQuantity">Loading...</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">💰 Total Bayar</div>
+        <div class="summary-value" id="orderTotal">Loading...</div>
+      </div>
+    </div>
+
+    <div class="countdown-timer" id="paymentTimer">23:59:59</div>
+  </div>
+
+  <!-- Payment Warning -->
+  <div class="payment-section">
+    <div class="payment-warning">
+      <h3>⚠️ WAJIB BAYAR DULU!</h3>
+      <p>Scan QR QRIS di bawah untuk melakukan pembayaran sesuai total yang tertera</p>
+    </div>
+
+    <h3 style="color: #1f2937; margin-bottom: 15px;">💳 Scan QR QRIS untuk Pembayaran</h3>
+    
+    <img id="qrCodeImg" class="qr-code" alt="GrowGTPS QRIS Payment" src="https://iili.io/FSJ96oQ.md.jpg" />
+    
+    <div class="qr-note">
+      <strong>✅ GrowGTPS - QR QRIS AKTIF</strong><br>
+      NMID: ID102541038957 • Semua E-Wallet & Bank<br>
+      Scan menggunakan aplikasi pembayaran Anda
+    </div>
+  </div>
+
+  <!-- Upload Bukti Transfer -->
+  <div class="upload-section">
+    <h3 style="color: #1f2937; margin-bottom: 20px; text-align: center;">📸 Upload Bukti Transfer</h3>
+    
+    <div class="upload-area" id="uploadArea">
+      <div class="upload-icon">📷</div>
+      <div class="upload-text">Klik atau Drag & Drop Foto Bukti Transfer</div>
+      <div class="upload-hint">Format: JPG, PNG, JPEG (Maksimal 5MB)</div>
+    </div>
+
+    <input type="file" id="fileInput" class="file-input" accept="image/*" />
+
+    <div class="preview-container" id="previewContainer">
+      <img id="previewImage" class="preview-image" />
+      <div class="preview-info" id="previewInfo"></div>
+    </div>
+
+    <button id="submitUpload" class="submit-upload-btn" disabled>
+      📤 Kirim Bukti Transfer
+    </button>
+  </div>
+
+  <!-- WhatsApp Section -->
+  <div class="whatsapp-section">
+    <h3 style="color: #1f2937; margin-bottom: 15px;">📱 Hubungi Admin</h3>
+    <p style="color: #6b7280; margin-bottom: 20px;">
+      Setelah upload bukti, hubungi admin untuk konfirmasi pembayaran
+    </p>
+    <a href="#" id="whatsappBtn" class="whatsapp-btn" target="_blank">
+      💬 Chat Admin WhatsApp
+    </a>
+    <br>
+    <a href="index.html" class="back-btn">
+      ← Kembali ke Form Order
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var orderData = null;
+  var paymentTimer;
+  var uploadedFile = null;
+
+  function getOrderFromURL() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var orderParam = urlParams.get('order');
+    
+    if (orderParam) {
+      try {
+        return JSON.parse(decodeURIComponent(orderParam));
+      } catch (e) {
+        console.error('Error parsing order data:', e);
+      }
+    }
+    
+    // Return dummy data for testing if no URL parameter
+    return {
+      trackingNumber: 'GTPS123456DEMO',
+      username: 'DemoUser',
+      world: 'DemoWorld',
+      itemName: 'Role Admin',
+      quantity: 1,
+      totalPrice: 15000,
+      timestamp: Date.now(),
+      whatsapp: '+6281234567890',
+      email: 'demo@example.com'
+    };
+  }
+
+  function formatTime(date) {
+    return date.toLocaleString('id-ID', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  }
+
+  function startCountdown(endTime) {
+    function updateTimer() {
+      var now = new Date().getTime();
+      var distance = endTime - now;
+      
+      if (distance < 0) {
+        document.getElementById('paymentTimer').textContent = 'EXPIRED';
+        document.getElementById('paymentTimer').style.background = '#ef4444';
+        clearInterval(paymentTimer);
+        return;
+      }
+      
+      var hours = Math.floor(distance / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('paymentTimer').textContent = 
+        String(hours).padStart(2, '0') + ':' +
+        String(minutes).padStart(2, '0') + ':' +
+        String(seconds).padStart(2, '0');
+    }
+    
+    updateTimer();
+    paymentTimer = setInterval(updateTimer, 1000);
+  }
+
+  function createWhatsAppMessage(order, hasProof) {
+    var proofText = hasProof ? '\n📸 *Bukti Transfer:* Sudah diupload' : '\n⚠️ *Bukti Transfer:* Belum diupload';
+    
+    var message = `🎮 *KONFIRMASI PEMBAYARAN GROWGTPS*
+
+📦 *Nomor Resi:* ${order.trackingNumber}
+👤 *Username:* ${order.username}
+🌍 *World:* ${order.world}
+🎁 *Item:* ${order.itemName}
+📦 *Jumlah:* ${order.quantity}
+💰 *Total Dibayar:* Rp ${order.totalPrice.toLocaleString('id-ID')}
+📅 *Waktu Order:* ${formatTime(new Date(order.timestamp))}${proofText}
+
+📱 *Kontak:* ${order.whatsapp}
+📧 *Email:* ${order.email}
+
+🔔 *Status:* Sudah Transfer - Menunggu Konfirmasi
+💳 *Metode:* QRIS
+
+Mohon konfirmasi pembayaran dan proses pengiriman item ke akun saya. Terima kasih! 🙏`;
+
+    return encodeURIComponent(message);
+  }
+
+  function showNotification(message, type) {
+    var notification = document.createElement('div');
+    notification.className = 'notification ' + type;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(function() {
+      if (notification.parentNode) {
+        notification.style.animation = 'slideIn 0.3s ease reverse';
+        setTimeout(function() {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }
+    }, 4000);
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    var k = 1024;
+    var sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function handleFileUpload(file) {
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      showNotification('File harus berupa gambar (JPG, PNG, JPEG)', 'error');
+      return;
+    }
+
+    // Validate file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+      showNotification('Ukuran file maksimal 5MB', 'error');
+      return;
+    }
+
+    uploadedFile = file;
+
+    // Show preview
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('previewImage').src = e.target.result;
+      document.getElementById('previewInfo').textContent = 
+        `File: ${file.name} (${formatFileSize(file.size)})`;
+      document.getElementById('previewContainer').style.display = 'block';
+      document.getElementById('submitUpload').disabled = false;
+    };
+    reader.readAsDataURL(file);
+
+    showNotification('File berhasil dipilih! Klik "Kirim Bukti Transfer"', 'success');
+  }
+
+  function setupUpload() {
+    var uploadArea = document.getElementById('uploadArea');
+    var fileInput = document.getElementById('fileInput');
+    var submitBtn = document.getElementById('submitUpload');
+
+    // Click to upload
+    uploadArea.addEventListener('click', function() {
+      fileInput.click();
+    });
+
+    // File input change
+    fileInput.addEventListener('change', function() {
+      if (this.files.length > 0) {
+        handleFileUpload(this.files[0]);
+      }
+    });
+
+    // Drag and drop
+    uploadArea.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      this.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      this.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      this.classList.remove('dragover');
+      
+      if (e.dataTransfer.files.length > 0) {
+        handleFileUpload(e.dataTransfer.files[0]);
+      }
+    });
+
+    // Submit upload
+    submitBtn.addEventListener('click', function() {
+      if (!uploadedFile) {
+        showNotification('Pilih file bukti transfer terlebih dahulu', 'error');
+        return;
+      }
+
+      this.disabled = true;
+      this.innerHTML = '<div class="loading"></div> Mengirim...';
+
+      // Simulate upload process
+      setTimeout(function() {
+        showNotification('Bukti transfer berhasil diupload!', 'success');
+        submitBtn.innerHTML = '✅ Bukti Sudah Dikirim';
+        submitBtn.style.background = '#10b981';
+        
+        // Update WhatsApp message to include proof uploaded
+        var whatsappMessage = createWhatsAppMessage(orderData, true);
+        var whatsappUrl = 'https://wa.me/6288112773391?text=' + whatsappMessage;
+        document.getElementById('whatsappBtn').href = whatsappUrl;
+        
+      }, 2000);
+    });
+  }
+
+  function displayOrderSummary() {
+    if (!orderData) {
+      orderData = getOrderFromURL(); // Get dummy data if needed
+    }
+
+    // Display order information
+    document.getElementById('trackingNumber').textContent = orderData.trackingNumber;
+    document.getElementById('orderUsername').textContent = orderData.username;
+    document.getElementById('orderItem').textContent = orderData.itemName;
+    document.getElementById('orderQuantity').textContent = orderData.quantity + ' pcs';
+    document.getElementById('orderTotal').textContent = 'Rp ' + orderData.totalPrice.toLocaleString('id-ID');
+
+    // Setup countdown
+    var deadline = new Date(orderData.timestamp + 24 * 60 * 60 * 1000);
+    startCountdown(deadline.getTime());
+
+    // Setup WhatsApp link
+    var whatsappMessage = createWhatsAppMessage(orderData, false);
+    var whatsappUrl = 'https://wa.me/6288112773391?text=' + whatsappMessage;
+    document.getElementById('whatsappBtn').href = whatsappUrl;
+  }
+
+  function init() {
+    orderData = getOrderFromURL();
+    displayOrderSummary();
+    setupUpload();
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html>
