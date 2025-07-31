@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GrowGTPS - Top Up Role & Assets</title>
 <style>
-  /* Semua style sama seperti sebelumnya, tidak saya ubah */
   * {
     margin: 0;
     padding: 0;
@@ -320,6 +319,36 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   }
 
+  .payment-info {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .payment-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #92400e;
+    text-align: center;
+  }
+
+  .order-info {
+    background: #dbeafe;
+    border: 2px solid #3b82f6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .order-id {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e40af;
+    text-align: center;
+  }
+
   .upload-section {
     display: flex;
     flex-direction: column;
@@ -455,6 +484,11 @@
     text-align: center;
   }
 
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
   .success-checkmark {
     width: 80px;
     height: 80px;
@@ -509,6 +543,42 @@
     font-weight: 500;
   }
 
+  .whatsapp-link {
+    background: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin: 10px 5px;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-link:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+  }
+
+  .close-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+  }
+
   @media (max-width: 768px) {
     .container {
       padding: 15px;
@@ -534,26 +604,9 @@
       padding: 20px;
     }
 
-    .modal-content {
-      margin: 10% auto;
-      padding: 20px;
-    }
-
     .payment-content {
       grid-template-columns: 1fr;
       gap: 20px;
-    }
-
-    .qr-placeholder {
-      width: 150px;
-      height: 150px;
-    }
-
-    .payment-link,
-    .whatsapp-link {
-      display: block;
-      text-align: center;
-      margin: 10px 0;
     }
   }
 
@@ -599,46 +652,6 @@
         <div class="form-group full-width">
           <label for="item">🎁 Pilih Item (Role & Assets):</label>
           <div class="item-selector">
-            <div class="item-box" data-value="Super Supporter|2500">
-              <div class="item-icon">⭐</div>
-              <div class="item-name">Super Supporter</div>
-              <div class="item-price">Rp 2.500</div>
-            </div>
-            <div class="item-box" data-value="Crole Permanent|5000">
-              <div class="item-icon">🎭</div>
-              <div class="item-name">Crole Permanent</div>
-              <div class="item-price">Rp 5.000</div>
-            </div>
-            <div class="item-box" data-value="Role Admin|15000">
-              <div class="item-icon">👨‍💼</div>
-              <div class="item-name">Role Admin</div>
-              <div class="item-price">Rp 15.000</div>
-            </div>
-            <div class="item-box" data-value="Role Community Manager|25000">
-              <div class="item-icon">👥</div>
-              <div class="item-name">Role Community Manager</div>
-              <div class="item-price">Rp 25.000</div>
-            </div>
-            <div class="item-box" data-value="Iori Yagami|25000">
-              <div class="item-icon">🥋</div>
-              <div class="item-name">Iori Yagami</div>
-              <div class="item-price">Rp 25.000</div>
-            </div>
-            <div class="item-box" data-value="Role General Manager|35000">
-              <div class="item-icon">🏢</div>
-              <div class="item-name">Role General Manager</div>
-              <div class="item-price">Rp 35.000</div>
-            </div>
-            <div class="item-box" data-value="Sunjinwo|35000">
-              <div class="item-icon">🌟</div>
-              <div class="item-name">Sunjinwo</div>
-              <div class="item-price">Rp 35.000</div>
-            </div>
-            <div class="item-box" data-value="Role God|50000">
-              <div class="item-icon">⚡</div>
-              <div class="item-name">Role God</div>
-              <div class="item-price">Rp 50.000</div>
-            </div>
             <div class="item-box" data-value="Legendary Wings|65000">
               <div class="item-icon">🕊️</div>
               <div class="item-name">Legendary Wings</div>
@@ -670,42 +683,15 @@
     </form>
   </div>
 
-  <div class="info-section">
-    <h2 style="color: #1f2937; text-align: center; margin-bottom: 20px;">ℹ️ Informasi Penting</h2>
-    
-    <div class="info-grid">
-      <div class="info-card">
-        <h3>⏰ Waktu Proses</h3>
-        <p>Pesanan diproses dalam 1-24 jam setelah pembayaran dikonfirmasi. Harap bersabar!</p>
-      </div>
-      
-      <div class="info-card">
-        <h3>🔒 Keamanan</h3>
-        <p>Semua transaksi menggunakan QRIS resmi. Data Anda aman dan tidak akan disalahgunakan.</p>
-      </div>
-      
-      <div class="info-card">
-        <h3>📞 Customer Service</h3>
-        <p>Tim support siap membantu 24/7 melalui WhatsApp. Respon cepat & ramah!</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="contact-section">
-    <h2 style="color: #1f2937; margin-bottom: 15px;">💬 Butuh Bantuan?</h2>
-    <p style="color: #6b7280; margin-bottom: 20px;">
-      Tim customer service kami siap membantu Anda 24/7
-    </p>
-    <a href="https://wa.me/628811273391" class="contact-btn" target="_blank">
-      📱 Chat WhatsApp
-    </a>
-  </div>
-
   <!-- Payment Section -->
   <div id="paymentSection" class="payment-section">
     <div class="payment-header">
       <div class="payment-title">💳 Pembayaran QRIS</div>
       <div class="payment-subtitle">Scan QR Code untuk melakukan pembayaran</div>
+    </div>
+
+    <div class="order-info">
+      <div class="order-id" id="orderIdDisplay">Order ID: -</div>
     </div>
 
     <div class="payment-content">
@@ -746,6 +732,43 @@
       💰 Proses Pembayaran
     </button>
   </div>
+
+  <div class="info-section">
+    <h2 style="color: #1f2937; text-align: center; margin-bottom: 20px;">ℹ️ Informasi Penting</h2>
+    
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>⏰ Waktu Proses</h3>
+        <p>Pesanan diproses dalam 1-24 jam setelah pembayaran dikonfirmasi. Harap bersabar!</p>
+      </div>
+      
+      <div class="info-card">
+        <h3>🔒 Keamanan</h3>
+        <p>Semua transaksi menggunakan QRIS resmi. Data Anda aman dan tidak akan disalahgunakan.</p>
+      </div>
+      
+      <div class="info-card">
+        <h3>📞 Customer Service</h3>
+        <p>Tim support siap membantu 24/7 melalui WhatsApp. Respon cepat & ramah!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h2 style="color: #1f2937; margin-bottom: 15px;">💬 Butuh Bantuan?</h2>
+    <p style="color: #6b7280; margin-bottom: 20px;">
+      Tim customer service kami siap membantu Anda 24/7
+    </p>
+    <a href="https://wa.me/628811273391?text=Halo%20admin,%20saya%20butuh%20bantuan%20untuk%20top%20up%20GrowGTPS" class="contact-btn" target="_blank">
+      📱 Chat WhatsApp
+    </a>
+    <a href="https://t.me/growgtps" class="contact-btn" style="background: linear-gradient(135deg, #0088cc, #006ba3);" target="_blank">
+      ✈️ Telegram
+    </a>
+    <a href="mailto:support@growgtps.com" class="contact-btn" style="background: linear-gradient(135deg, #ea4335, #d33a2c);" target="_blank">
+      📧 Email Support
+    </a>
+  </div>
 </div>
 
 <!-- Success Payment Modal -->
@@ -769,7 +792,7 @@
     </div>
 
     <div style="text-align: center;">
-      <a href="https://wa.me/628811273391" class="whatsapp-link" target="_blank">
+      <a href="https://wa.me/628811273391?text=Halo%20admin,%20pembayaran%20saya%20sudah%20berhasil%20diproses.%20Mohon%20konfirmasi%20untuk%20pengiriman%20item%20GrowGTPS.%20Order%20ID:%20" id="whatsappOrderLink" class="whatsapp-link" target="_blank">
         📱 Chat Admin WhatsApp
       </a>
     </div>
@@ -782,43 +805,35 @@
 
 <script>
 (function(){
-  var DB_NAME = 'growgtps_customer_db';
-  var DB_STORE = 'customer_orders';
-  var db;
-
-  function openDb(){
-    return new Promise(function(resolve, reject) {
-      var req = indexedDB.open(DB_NAME, 1);
-      req.onerror = function() { reject('Gagal membuka database.'); };
-      req.onsuccess = function() {
-        db = req.result;
-        resolve(db);
-      };
-      req.onupgradeneeded = function(e) {
-        db = e.target.result;
-        if(!db.objectStoreNames.contains(DB_STORE)){
-          var store = db.createObjectStore(DB_STORE, {keyPath:'id', autoIncrement:true});
-          store.createIndex('timestamp', 'timestamp', {unique:false});
-        }
-      };
-    });
-  }
+  // URL Google Apps Script lu yang udah di-deploy
+  const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-j27U_VAzgJJ7Q9yVZ3BIN_Kzo4T__-KLIjtb3esSn7CVOLB1r9QXOneE32Ia91yb/exec';
+  
+  var currentOrderId = '';
 
   function addOrder(order) {
     return new Promise(function(resolve, reject) {
-      var tx = db.transaction(DB_STORE, 'readwrite');
-      var store = tx.objectStore(DB_STORE);
-      var req = store.add(order);
-      req.onsuccess = function() { resolve(req.result); };
-      req.onerror = function() { reject('Gagal menambah order.'); };
+      // Kirim ke Google Sheets via Apps Script
+      fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          order.trackingNumber = data.orderId;
+          currentOrderId = data.orderId;
+          resolve(order);
+        } else {
+          reject(data.message || 'Gagal memproses pesanan');
+        }
+      })
+      .catch(error => {
+        reject('Network error: ' + error.toString());
+      });
     });
-  }
-
-  function generateTrackingNumber() {
-    var prefix = 'GTPS';
-    var timestamp = Date.now().toString();
-    var random = Math.random().toString(36).substr(2, 4).toUpperCase();
-    return prefix + timestamp.substr(-6) + random;
   }
 
   function setupPaymentUpload() {
@@ -901,12 +916,16 @@
 
       // Simulate processing time
       setTimeout(function() {
+        // Update WhatsApp link with Order ID
+        var whatsappLink = document.getElementById('whatsappOrderLink');
+        whatsappLink.href = 'https://wa.me/628811273391?text=Halo%20admin,%20pembayaran%20saya%20sudah%20berhasil%20diproses.%20Mohon%20konfirmasi%20untuk%20pengiriman%20item%20GrowGTPS.%20Order%20ID:%20' + currentOrderId;
+        
         document.getElementById('successPaymentModal').style.display = 'block';
         document.getElementById('paymentSection').style.display = 'none';
-
+        
         processBtn.disabled = false;
         processBtn.innerHTML = '💰 Proses Pembayaran';
-
+        
         // Reset upload
         uploadedFile.style.display = 'none';
         uploadArea.style.display = 'block';
@@ -920,11 +939,11 @@
   function setupPaymentModal() {
     var paymentModal = document.getElementById('successPaymentModal');
     var closePaymentBtn = document.getElementById('closePaymentModal');
-
+    
     closePaymentBtn.addEventListener('click', function() {
       paymentModal.style.display = 'none';
     });
-
+    
     window.addEventListener('click', function(event) {
       if (event.target === paymentModal) {
         paymentModal.style.display = 'none';
@@ -936,7 +955,7 @@
     var submitBtn = document.querySelector('.submit-btn');
     var usernameInput = document.getElementById('username');
     var itemHidden = document.getElementById('item');
-
+    
     if (usernameInput.value.trim() === '' || itemHidden.value === '') {
       submitBtn.disabled = true;
     } else {
@@ -987,7 +1006,7 @@
       var email = form.email.value.trim();
       var whatsapp = form.whatsapp.value.trim();
       var quantity = parseInt(form.quantity.value);
-
+      
       var parts = itemHidden.value.split('|');
       var itemName = parts[0];
       var price = parseInt(parts[1]);
@@ -1005,18 +1024,18 @@
         paymentMethod: 'QRIS',
         paymentStatus: 'Pending',
         deliveryStatus: 'Pending',
-        timestamp: Date.now(),
-        trackingNumber: generateTrackingNumber()
+        timestamp: Date.now()
       };
 
-      addOrder(order).then(function() {
-        // TIDAK DIPANGGIL LAGI: showSuccessModal
-        // Show payment section langsung tanpa popup modal
+      addOrder(order).then(function(result) {
+        // Show payment section dengan Order ID
         document.getElementById('paymentSection').style.display = 'block';
         document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
-
+        document.getElementById('orderIdDisplay').textContent = 'Order ID: ' + currentOrderId;
+        
+        // Scroll to payment section
         setTimeout(function() {
-          document.getElementById('paymentSection').scrollIntoView({
+          document.getElementById('paymentSection').scrollIntoView({ 
             behavior: 'smooth',
             block: 'start'
           });
@@ -1031,6 +1050,7 @@
 
       }).catch(function(error) {
         console.log('Error: ' + error);
+        // Could show error message here if needed
       }).finally(function() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '🚀 Buat Pesanan Disini';
@@ -1040,15 +1060,9 @@
   }
 
   function init(){
-    openDb().then(function() {
-      setupUI();
-      setupPaymentUpload();
-      setupPaymentModal();
-    }).catch(function(e) {
-      console.log('Database error: ' + e);
-      setupPaymentUpload();
-      setupPaymentModal();
-    });
+    setupUI();
+    setupPaymentUpload();
+    setupPaymentModal();
   }
 
   init();
@@ -1056,4 +1070,44 @@
 </script>
 
 </body>
-</html>
+</html>Super Supporter|2500">
+              <div class="item-icon">⭐</div>
+              <div class="item-name">Super Supporter</div>
+              <div class="item-price">Rp 2.500</div>
+            </div>
+            <div class="item-box" data-value="Crole Permanent|5000">
+              <div class="item-icon">🎭</div>
+              <div class="item-name">Crole Permanent</div>
+              <div class="item-price">Rp 5.000</div>
+            </div>
+            <div class="item-box" data-value="Role Admin|15000">
+              <div class="item-icon">👨‍💼</div>
+              <div class="item-name">Role Admin</div>
+              <div class="item-price">Rp 15.000</div>
+            </div>
+            <div class="item-box" data-value="Role Community Manager|25000">
+              <div class="item-icon">👥</div>
+              <div class="item-name">Role Community Manager</div>
+              <div class="item-price">Rp 25.000</div>
+            </div>
+            <div class="item-box" data-value="Iori Yagami|25000">
+              <div class="item-icon">🥋</div>
+              <div class="item-name">Iori Yagami</div>
+              <div class="item-price">Rp 25.000</div>
+            </div>
+            <div class="item-box" data-value="Role General Manager|35000">
+              <div class="item-icon">🏢</div>
+              <div class="item-name">Role General Manager</div>
+              <div class="item-price">Rp 35.000</div>
+            </div>
+            <div class="item-box" data-value="Sunjinwo|35000">
+              <div class="item-icon">🌟</div>
+              <div class="item-name">Sunjinwo</div>
+              <div class="item-price">Rp 35.000</div>
+            </div>
+            <div class="item-box" data-value="Role God|50000">
+              <div class="item-icon">⚡</div>
+              <div class="item-name">Role God</div>
+              <div class="item-price">Rp 50.000</div>
+            </div>
+            <div class="item-box" data-value="
