@@ -881,9 +881,6 @@
     <a href="https://wa.me/628811273391?text=Halo%20admin,%20saya%20butuh%20bantuan%20untuk%20top%20up%20GrowGTPS" class="contact-btn" target="_blank">
       📱 Chat WhatsApp
     </a>
-    <a href="mailto:growps79@gmail.com?subject=Bantuan%20GrowGTPS&body=Halo%20admin,%20saya%20butuh%20bantuan%20untuk%20top%20up%20GrowGTPS" class="contact-btn" style="background: linear-gradient(135deg, #ea4335, #d33a2c);" target="_blank">
-      📧 Email Support
-    </a>
   </div>
 </div>
 
@@ -1244,67 +1241,58 @@
         timestamp: Date.now()
       };
 
-      addOrder(order).then(function(result) {
-        // Show payment section dengan Order ID
+      // Generate demo Order ID langsung
+      var demoOrderId = 'GTPS' + Date.now().toString().slice(-6) + Math.random().toString(36).substr(2, 4).toUpperCase();
+      currentOrderId = demoOrderId;
+
+      // Simulate processing delay
+      setTimeout(function() {
+        // Show payment section
         document.getElementById('paymentSection').style.display = 'block';
         document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
         document.getElementById('orderIdDisplay').textContent = 'Order ID: ' + currentOrderId;
         
-        // Scroll to payment section dengan delay yang cukup
-        setTimeout(function() {
-          var paymentSection = document.getElementById('paymentSection');
-          paymentSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }, 500); // Increased delay
-
-        // Reset form
-        form.reset();
-        for(var k = 0; k < itemBoxes.length; k++) {
-          itemBoxes[k].classList.remove('selected');
-        }
-        itemHidden.value = '';
-        redeemInput.value = '';
-        appliedRedeemCode = '';
-        currentDiscount = 0;
-        redeemStatus.textContent = '';
-        redeemStatus.className = '';
-        document.getElementById('priceBreakdown').style.display = 'none';
-        updateSubmitButton();
-
-      }).catch(function(error) {
-        console.log('Error: ' + error);
-        // Show payment section even if there's an error (for demo purposes)
-        document.getElementById('paymentSection').style.display = 'block';
-        document.getElementById('paymentAmount').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
-        document.getElementById('orderIdDisplay').textContent = 'Order ID: DEMO-' + Date.now().toString().slice(-6);
-        
-        setTimeout(function() {
-          var paymentSection = document.getElementById('paymentSection');
-          paymentSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }, 500);
-        
-        // Reset form
-        form.reset();
-        for(var k = 0; k < itemBoxes.length; k++) {
-          itemBoxes[k].classList.remove('selected');
-        }
-        itemHidden.value = '';
-        redeemInput.value = '';
-        appliedRedeemCode = '';
-        currentDiscount = 0;
-        redeemStatus.textContent = '';
-        redeemStatus.className = '';
-        document.getElementById('priceBreakdown').style.display = 'none';
-        updateSubmitButton();
-      }).finally(function() {
+        // Reset button
         submitBtn.disabled = false;
         submitBtn.innerHTML = '🚀 Buat Pesanan Disini';
-      });
+        
+        // Reset form
+        form.reset();
+        for(var k = 0; k < itemBoxes.length; k++) {
+          itemBoxes[k].classList.remove('selected');
+        }
+        itemHidden.value = '';
+        var redeemInput = document.getElementById('redeemCode');
+        redeemInput.value = '';
+        appliedRedeemCode = '';
+        currentDiscount = 0;
+        redeemStatus.textContent = '';
+        redeemStatus.className = '';
+        document.getElementById('priceBreakdown').style.display = 'none';
+        updateSubmitButton();
+        
+        // Scroll to payment section setelah semua selesai
+        setTimeout(function() {
+          var paymentSection = document.getElementById('paymentSection');
+          if (paymentSection) {
+            paymentSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 100);
+        
+        // Try to send to Google Sheets in background
+        addOrder(order).then(function(result) {
+          if (result && result.trackingNumber) {
+            currentOrderId = result.trackingNumber;
+            document.getElementById('orderIdDisplay').textContent = 'Order ID: ' + currentOrderId;
+          }
+        }).catch(function(error) {
+          console.log('Background order save error: ' + error);
+        });
+        
+      }, 1500); // 1.5 second delay
     });
   }
 
